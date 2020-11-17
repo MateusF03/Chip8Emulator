@@ -16,7 +16,6 @@ public class Emulator extends Thread {
     private int opcode;
     private final KeyInput keyInput;
     private final Random random = new Random();
-    private final Logger logger;
     private final int[] V = new int[16];
     private int pc = 0x200;
     private int I = 0;
@@ -30,16 +29,6 @@ public class Emulator extends Thread {
     public Emulator(Display display, KeyInput keyInput) {
         this.display = display;
         this.keyInput = keyInput;
-        this.logger = Logger.getLogger("Emulator");
-        this.logger.setUseParentHandlers(false);
-        File logFile = new File("log.txt");
-        try {
-            if (!logFile.exists()) logFile.createNewFile();
-            FileHandler fileHandler = new FileHandler(logFile.getPath());
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         int[] fontSet = new int[] {
                 0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
                 0x20, 0x60, 0x20, 0x20, 0x70, // 1
